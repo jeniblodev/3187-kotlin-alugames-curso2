@@ -13,9 +13,7 @@ import java.net.http.HttpResponse
 
 class ConsumoApi {
 
-    fun buscaJogo(id:String): InfoJogo {
-        val endereco = "https://www.cheapshark.com/api/1.0/games?id=$id"
-
+    private fun consomeDados(endereco: String): String {
         val client: HttpClient = HttpClient.newHttpClient()
         val request = HttpRequest.newBuilder()
             .uri(URI.create(endereco))
@@ -23,7 +21,12 @@ class ConsumoApi {
         val response = client
             .send(request, HttpResponse.BodyHandlers.ofString())
 
-        val json = response.body()
+        return response.body()
+    }
+
+    fun buscaJogo(id:String): InfoJogo {
+        val endereco = "https://www.cheapshark.com/api/1.0/games?id=$id"
+        val json = consomeDados(endereco)
 
         val gson = Gson()
         val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
@@ -34,15 +37,7 @@ class ConsumoApi {
 
     fun buscaGamers(): List<Gamer> {
         val endereco = "https://raw.githubusercontent.com/jeniblodev/arquivosJson/main/gamers.json"
-
-        val client: HttpClient = HttpClient.newHttpClient()
-        val request = HttpRequest.newBuilder()
-            .uri(URI.create(endereco))
-            .build()
-        val response = client
-            .send(request, HttpResponse.BodyHandlers.ofString())
-
-        val json = response.body()
+        val json = consomeDados(endereco)
 
         val gson = Gson()
         val meuGamerTipo = object : TypeToken<List<InfoGamerJson>>() {}.type
