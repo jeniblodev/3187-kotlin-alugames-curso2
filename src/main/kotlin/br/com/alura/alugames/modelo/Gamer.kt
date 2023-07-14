@@ -51,8 +51,8 @@ data class Gamer(var nome:String, var email:String) {
         }
     }
 
-    fun alugaJogo(jogo: Jogo, dataInicial: LocalDate, dataFinal: LocalDate): Aluguel {
-        return Aluguel(this, jogo, dataInicial, dataFinal)
+    fun alugaJogo(jogo: Jogo, periodo: Periodo): Aluguel {
+        return Aluguel(this, jogo, periodo)
     }
 
     companion object {
