@@ -1,5 +1,6 @@
 package br.com.alura.alugames.modelo
 
+import java.time.LocalDate
 import java.util.Scanner
 import kotlin.random.Random
 
@@ -50,8 +51,8 @@ data class Gamer(var nome:String, var email:String) {
         }
     }
 
-    fun alugaJogo(jogo: Jogo): Aluguel {
-        return Aluguel(this, jogo)
+    fun alugaJogo(jogo: Jogo, dataInicial: LocalDate, dataFinal: LocalDate): Aluguel {
+        return Aluguel(this, jogo, dataInicial, dataFinal)
     }
 
     companion object {
