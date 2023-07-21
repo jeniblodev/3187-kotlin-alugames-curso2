@@ -1,5 +1,7 @@
 package br.com.alura.alugames.modelo
 
+import br.com.alura.alugames.utilitario.formatoComDuasCasasDecimais
+
 class PlanoAssinatura(
     tipo: String,
     val mesalidade: Double,
@@ -16,7 +18,7 @@ class PlanoAssinatura(
             if (aluguel.gamer.media > 8) {
                 valorOriginal -= valorOriginal * percentualDescontoReputacao
             }
-            valorOriginal
+            valorOriginal.formatoComDuasCasasDecimais()
         }
 
     }
